@@ -1,0 +1,19 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Country List
+{% endblock %}
+
+{% block content %}
+    <h2>Country List</h2>
+    <ul>
+        {% for country in country_list %}
+            <li>
+                <strong>Name:</strong> {{ country.name }}<br>
+                <strong>Population:</strong> {{ country.population }}<br>
+                <strong>Capital:</strong> {{ country.capital }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}

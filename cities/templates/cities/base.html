@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            title is provided by inheriting templates
+        {% endblock %}
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if IE]><script
+      src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script><![endif]-->
+</head>
+
+<body>
+
+<div><!-- start of container -->
+    <header>
+        <h1>City Explorer</h1>
+        <h2>City Exploring System</h2>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="">
+                    Cities</a></li>
+            <li>
+                <a href="">
+                    Landmarks</a></li>
+            <li>
+                <a href="">
+                    Hotels</a></li>
+            <li>
+                <a href="">
+                    Restaurants</a></li>
+            <li>
+                <a href="">
+                    Events</a></li>
+            <li>
+                <a href="">
+                    Parks</a></li>
+            <li>
+                <a href="">
+                    Reviews</a></li>
+            <li>
+                <a href="">
+                    Museums</a></li>
+            <li>
+                <a href="">
+                    Countries</a></li>
+            <li>
+                <a href="">
+                    Tourist Attractions</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}
+            This is default content!
+        {% endblock %}
+    </main>
+</div><!-- end of container -->
+
+<footer>
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0"
+                 src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+        </a><br/>
+        <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">City Explorer</span>
+        is licensed under a
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike
+            4.0 International License</a>.
+    </p>
+</footer>
+
+</body>
+</html>
+
+
+

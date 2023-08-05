@@ -1,0 +1,19 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Park List
+{% endblock %}
+
+{% block content %}
+    <h2>Park List</h2>
+    <ul>
+        {% for park in park_list %}
+            <li>
+                <strong>Name:</strong> {{ park.name }}<br>
+                <strong>City:</strong> {{ park.city.name }}<br>
+                <strong>Area:</strong> {{ park.area }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}

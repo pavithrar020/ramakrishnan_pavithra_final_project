@@ -1,0 +1,26 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    City List
+{% endblock %}
+
+{% block content %}
+    <h2>City List</h2>
+    <ul>
+        {% for city in city_list %}
+            <li>
+                <strong>Name:</strong> {{ city.name }}<br>
+                <strong>Country:</strong> {{ city.country }}<br>
+                <strong>Population:</strong> {{ city.population }}<br>
+                {% if city.description %}
+                    <strong>Description:</strong> {{ city.description }}
+                {% else %}
+                    <em>No description available.</em>
+                {% endif %}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

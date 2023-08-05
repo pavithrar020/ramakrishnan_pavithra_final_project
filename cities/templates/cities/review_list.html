@@ -1,0 +1,23 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Review List
+{% endblock %}
+
+{% block content %}
+    <h2>Review List</h2>
+    <ul>
+        {% for review in review_list %}
+            <li>
+                <strong>City:</strong> {{ review.city.name }}<br>
+                {% if review.comment %}
+                    <strong>Comment:</strong> {{ review.comment|truncatechars:50 }}<br>
+                {% else %}
+                    <em>No comment available.</em><br>
+                {% endif %}
+                <strong>Rating:</strong> {{ review.rating }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}

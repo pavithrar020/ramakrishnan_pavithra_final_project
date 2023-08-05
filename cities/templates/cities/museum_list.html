@@ -1,0 +1,18 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Museum List
+{% endblock %}
+
+{% block content %}
+    <h2>Museum List</h2>
+    <ul>
+        {% for museum in museum_list %}
+            <li>
+                <strong>Name:</strong> {{ museum.name }}<br>
+                <strong>City:</strong> {{ museum.city.name }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}
