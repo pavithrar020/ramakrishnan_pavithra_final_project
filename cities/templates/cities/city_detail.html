@@ -1,0 +1,69 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    City - {{ city.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ city.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Country:</th>
+                <td>{{ city.country }}</td>
+            </tr>
+            <tr>
+                <th>Population:</th>
+                <td>{{ city.population }}</td>
+            </tr>
+            {% if city.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ city.description }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <!-- Add the update and delete links/buttons -->
+    <section>
+    {%  if perms.cities.change_city %}
+        <a href="{% url 'update-city' city.id %}"class="button button-primary">Update</a>
+        {% endif %}
+
+    {%  if perms.cities.delete_city %}
+        <a href="{% url 'delete-city' city.id %}"class="button button-primary">Delete</a>
+    {% endif %}
+    </section>
+
+    <section>
+        <h3>Landmarks</h3>
+        <ul>
+            {% for landmark in city.landmark_set.all %}
+                <li>
+                    <td><a href="{{ landmark.get_absolute_url }}">{{ landmark }}</a></td>
+                </li>
+            {% empty %}
+                <li><em>There are currently no landmarks for this city.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Hotels</h3>
+        <ul>
+            {% for hotel in city.hotel_set.all %}
+                <li>
+                    <a href="{{ hotel.get_absolute_url }}">{{ hotel }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no hotels for this city.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+{% endblock %}
+

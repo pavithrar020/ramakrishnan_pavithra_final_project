@@ -6,19 +6,33 @@
 
 {% block content %}
     <h2>Event List</h2>
+    <h4>Note: Date in next page should be inputted YYYY-MM-DD</h4>
+    {%  if perms.cities.add_event %}
+    <a href="{% url 'create-event' %}" class="button button-primary">Create Event</a>
+    {% endif %}
     <ul>
         {% for event in event_list %}
             <li>
-                <strong>Name:</strong> {{ event.name }}<br>
-                <strong>City:</strong> {{ event.city.name }}<br>
-                <strong>Date:</strong> {{ event.date }}<br>
-                {% if event.description %}
-                    <strong>Description:</strong> {{ event.description }}
-                {% else %}
-                    <em>No description available.</em>
-                {% endif %}
+                <a href="{{ event.get_absolute_url }}">{{ event.name }}</a>
             </li>
-            <hr>
         {% endfor %}
     </ul>
+
+{% if is_paginated %}
+        <ul>
+            {% if event_list.has_previous %}
+                <li>
+                    <a href="?page={{ event_list.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            <li>
+                Page {{ event_list.number }} of {{ paginator.num_pages }}
+            </li>
+            {% if event_list.has_next %}
+                <li>
+                    <a href="?page={{ event_list.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

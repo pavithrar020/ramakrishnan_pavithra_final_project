@@ -1,0 +1,14 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Create Restaurant
+{% endblock %}
+
+{% block content %}
+    <h2>Create Restaurant</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Restaurant</button>
+    </form>
+{% endblock %}

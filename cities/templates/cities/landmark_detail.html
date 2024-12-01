@@ -1,0 +1,92 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {{ landmark.name }} - Landmark Detail
+{% endblock %}
+
+{% block content %}
+    <h2>{{ landmark.name }}</h2>
+     <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>City:</th>
+                <td>{{ landmark.city.name }}</td>
+            </tr>
+            <tr>
+                <th>Type:</th>
+                <td>{{ landmark.get_landmark_type_display }}</td>
+            </tr>
+            {% if landmark.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ landmark.description }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>Description:</th>
+                    <td><em>No description available.</em></td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+    {%  if perms.cities.change_landmark %}
+        <a href="{% url 'update-landmark' landmark.id %}"class="button button-primary">Update</a>
+    {% endif %}
+
+    {%  if perms.cities.delete_landmark %}
+        <a href="{% url 'delete-landmark' landmark.id %}"class="button button-primary">Delete</a>
+    {% endif %}
+    </section>
+
+    <section>
+        <h3>City Details</h3>
+        <table>
+            <tr>
+                <th>Country:</th>
+                <td>{{ landmark.city.country }}</td>
+            </tr>
+            <tr>
+                <th>Population:</th>
+                <td>{{ landmark.city.population }}</td>
+            </tr>
+            {% if landmark.city.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ landmark.city.description }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+        <h3>Landmarks in {{ landmark.city.name }}</h3>
+        <ul>
+            {% for landmark in landmark.city.landmark_set.all %}
+                <li>
+                    <a href="">{{ landmark }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no landmarks for this city.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Hotels in {{ landmark.city.name }}</h3>
+        <ul>
+            {% for hotel in landmark.city.hotel_set.all %}
+                <li>
+                    <a href="{{ hotel.get_absolute_url }}">{{ hotel }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no hotels for this city.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+{% endblock %}

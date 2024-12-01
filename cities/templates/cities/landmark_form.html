@@ -1,0 +1,23 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if landmark.id %}
+        Update Landmark
+    {% else %}
+        Create Landmark
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% if landmark.id %}{% url 'update-landmark' landmark.id %}{% else %}{% url 'cities_landmark_list_urlpattern' %}{% endif %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+            {% if landmark.id %}
+                Update Landmark
+            {% else %}
+                Update Landmark
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if country.id %}
+        Update Country
+    {% else %}
+        Create Country
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'update-country' country.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+            {% if country.id %}
+                Update Country
+            {% else %}
+                Update Country
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

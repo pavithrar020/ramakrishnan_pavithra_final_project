@@ -6,14 +6,32 @@
 
 {% block content %}
     <h2>Country List</h2>
+        {%  if perms.cities.add_country %}
+    <a href="{% url 'create-country' %}" class="button button-primary">Create Country</a>
+    {% endif %}
     <ul>
         {% for country in country_list %}
             <li>
-                <strong>Name:</strong> {{ country.name }}<br>
-                <strong>Population:</strong> {{ country.population }}<br>
-                <strong>Capital:</strong> {{ country.capital }}<br>
+                <a href="{{ country.get_absolute_url }}">{{ country.name }}</a>
             </li>
-            <hr>
         {% endfor %}
     </ul>
+
+{% if is_paginated %}
+        <ul>
+            {% if country_list.has_previous %}
+                <li>
+                    <a href="?page={{ country_list.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            <li>
+                Page {{ country_list.number }} of {{ paginator.num_pages }}
+            </li>
+            {% if country_list.has_next %}
+                <li>
+                    <a href="?page={{ country_list.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

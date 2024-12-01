@@ -6,13 +6,32 @@
 
 {% block content %}
     <h2>Museum List</h2>
+    {%  if perms.cities.add_museum %}
+    <a href="{% url 'create-museum' %}" class="button button-primary">Create Museum</a>
+    {% endif %}
     <ul>
         {% for museum in museum_list %}
             <li>
-                <strong>Name:</strong> {{ museum.name }}<br>
-                <strong>City:</strong> {{ museum.city.name }}<br>
+                <a href="{{ museum.get_absolute_url }}">{{ museum.name }}</a>
             </li>
-            <hr>
         {% endfor %}
     </ul>
+
+    {% if is_paginated %}
+        <ul>
+            {% if museum_list.has_previous %}
+                <li>
+                    <a href="?page={{ museum_list.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            <li>
+                Page {{ museum_list.number }} of {{ paginator.num_pages }}
+            </li>
+            {% if museum_list.has_next %}
+                <li>
+                    <a href="?page={{ museum_list.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

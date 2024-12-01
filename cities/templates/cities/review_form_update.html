@@ -1,0 +1,13 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Update Review - {{ review.name }}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'update-review' review.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Review</button>
+    </form>
+{% endblock %}

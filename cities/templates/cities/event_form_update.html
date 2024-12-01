@@ -1,0 +1,13 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Update Event - {{ event.name }}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'update-event' event.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Event</button>
+    </form>
+{% endblock %}

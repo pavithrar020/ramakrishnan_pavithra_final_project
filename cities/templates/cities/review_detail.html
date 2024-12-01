@@ -1,0 +1,48 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Review - {{ review.city.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>Review - {{ review.city.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>City:</th>
+                <td>{{ review.city.name }}</td>
+            </tr>
+            {% if review.comment %}
+                <tr>
+                    <th>Comment:</th>
+                    <td>{{ review.comment }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>Comment:</th>
+                    <td><em>No comment available.</em></td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Rating:</th>
+                <td>{{ review.rating }}</td>
+            </tr>
+        </table>
+    </section>
+
+     <section>
+     {%  if perms.cities.change_review %}
+        <a href="{% url 'update-review' review.id %}"class="button button-primary">Update</a>
+         {% endif %}
+
+    {%  if perms.cities.delete_review %}
+        <a href="{% url 'delete-review' review.id %}"class="button button-primary">Delete</a>
+     {% endif %}
+
+    </section>
+
+{% endblock %}
+

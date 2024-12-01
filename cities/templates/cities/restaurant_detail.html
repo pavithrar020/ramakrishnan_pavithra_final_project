@@ -1,0 +1,88 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {{ restaurant.name }} - Restaurant Detail
+{% endblock %}
+
+{% block content %}
+    <h2>{{ restaurant.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>City:</th>
+                <td>{{ restaurant.city.name }}</td>
+            </tr>
+            <tr>
+                <th>Cuisine:</th>
+                <td>{{ restaurant.cuisine }}</td>
+            </tr>
+            <tr>
+                <th>Rating:</th>
+                <td>{{ restaurant.rating }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+    {%  if perms.cities.change_restaurant %}
+        <a href="{% url 'update-restaurant' restaurant.id %}"class="button button-primary">Update</a>
+    {% endif %}
+
+    {%  if perms.cities.delete_restaurant %}
+        <a href="{% url 'delete-restaurant' restaurant.id %}"class="button button-primary">Delete</a>
+    {% endif %}
+    </section>
+
+    <section>
+        <h3>City Details</h3>
+        <table>
+            <tr>
+                <th>Country:</th>
+                <td>{{ restaurant.city.country }}</td>
+            </tr>
+            <tr>
+                <th>Population:</th>
+                <td>{{ restaurant.city.population }}</td>
+            </tr>
+            {% if restaurant.city.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ restaurant.city.description }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+        <h3>Landmarks in {{ restaurant.city.name }}</h3>
+        <ul>
+            {% for landmark in restaurant.city.landmark_set.all %}
+                <li>
+                    <a href="{{ landmark.get_absolute_url }}">{{ landmark.name }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no landmarks for this city.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Hotels in {{ restaurant.city.name }}</h3>
+        <ul>
+            {% for hotel in restaurant.city.hotel_set.all %}
+                <li>
+                    <a href="{{ hotel.get_absolute_url }}">{{ hotel.name }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no hotels for this city.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+{% endblock %}
+
+
+

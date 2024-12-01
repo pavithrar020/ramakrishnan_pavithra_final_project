@@ -6,15 +6,32 @@
 
 {% block content %}
     <h2>Hotel List</h2>
+    {%  if perms.cities.add_hotel %}
+    <a href="{% url 'create-hotel' %}" class="button button-primary">Create Hotel</a>
+    {% endif %}
     <ul>
         {% for hotel in hotel_list %}
             <li>
-                <strong>Name:</strong> {{ hotel.name }}<br>
-                <strong>City:</strong> {{ hotel.city.name }}<br>
-                <strong>Address:</strong> {{ hotel.address }}<br>
-                <strong>Rating:</strong> {{ hotel.rating }}<br>
+                <a href="{{ hotel.get_absolute_url }}">{{ hotel.name }}</a>
             </li>
-            <hr>
         {% endfor %}
     </ul>
+
+{% if is_paginated %}
+        <ul>
+            {% if hotel_list.has_previous %}
+                <li>
+                    <a href="?page={{ hotel_list.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            <li>
+                Page {{ hotel_list.number }} of {{ paginator.num_pages }}
+            </li>
+            {% if hotel_list.has_next %}
+                <li>
+                    <a href="?page={{ hotel_list.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

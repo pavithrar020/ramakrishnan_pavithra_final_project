@@ -1,0 +1,23 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if museum.id %}
+        Update Museum
+    {% else %}
+        Create Museum
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% if museum.id %}{% url 'update-museum' museum.id %}{% else %}{% url 'cities_museum_list_urlpattern' %}{% endif %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+            {% if museum.id %}
+                Update Museum
+            {% else %}
+                Update Museum
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

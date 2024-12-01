@@ -6,10 +6,15 @@
 
 {% block content %}
     <h2>Review List</h2>
+        {%  if perms.cities.add_review %}
+        <h4>Once you post your review, you cannot edit/ delete it. This is for the purpose of being anonymous and having a variety of data.</h4>
+    <a href="{% url 'create-review' %}" class="button button-primary">Create Review</a>
+    {% endif %}
+
     <ul>
         {% for review in review_list %}
             <li>
-                <strong>City:</strong> {{ review.city.name }}<br>
+                <strong>{{ review.city.name }}</strong><br>
                 {% if review.comment %}
                     <strong>Comment:</strong> {{ review.comment|truncatechars:50 }}<br>
                 {% else %}
@@ -21,3 +26,5 @@
         {% endfor %}
     </ul>
 {% endblock %}
+
+

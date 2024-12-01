@@ -1,0 +1,80 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Event - {{ event.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ event.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>City:</th>
+                <td>{{ event.city.name }}</td>
+            </tr>
+            <tr>
+                <th>Date (YYYY-MM_DD):</th>
+                <td>{{ event.date }}</td>
+            </tr>
+
+            {% if event.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ event.description }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>Description:</th>
+                    <td><em>No description available.</em></td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+    {%  if perms.cities.change_event %}
+        <a href="{% url 'update-event' event.id %}"class="button button-primary">Update</a>
+    {% endif %}
+
+    {%  if perms.cities.delete_event %}
+        <a href="{% url 'delete-event' event.id %}"class="button button-primary">Delete</a>
+    {% endif %}
+    </section>
+
+    <section>
+        <h3>City's Country Details</h3>
+        <table>
+            <tr>
+                <th>Country:</th>
+                <td><a href="{{ event.city.get_absolute_url }}">{{ event.city.country }}</a></td>
+            </tr>
+            <tr>
+                <th>Population:</th>
+                <td>{{ event.city.population }}</td>
+            </tr>
+            {% if event.city.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ event.city.description }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+</section>
+
+<!-- Add CSS styles for the date format hint -->
+<style>
+    .date-format-hint {
+        color: #999;
+        font-size: 12px;
+    }
+</style>
+
+{% endblock %}
+
+
+

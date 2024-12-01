@@ -1,0 +1,23 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if review.id %}
+        Update Review
+    {% else %}
+        Create Review
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% if review.id %}{% url 'update-review' review.id %}{% else %}{% url 'cities_review_list_urlpattern' %}{% endif %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+            {% if review.id %}
+                Update Review
+            {% else %}
+                Update Review
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

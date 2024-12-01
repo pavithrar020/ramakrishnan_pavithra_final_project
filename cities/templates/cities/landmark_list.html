@@ -6,19 +6,19 @@
 
 {% block content %}
     <h2>Landmark List</h2>
+        {%  if perms.cities.add_landmark %}
+    <a href="{% url 'create-landmark' %}" class="button button-primary">Create Landmark</a>
+    {% endif %}
+
     <ul>
         {% for landmark in landmark_list %}
             <li>
-                <strong>Name:</strong> {{ landmark.name }}<br>
-                <strong>City:</strong> {{ landmark.city.name }}<br>
-                <strong>Type:</strong> {{ landmark.get_landmark_type_display }}<br>
-                {% if landmark.description %}
-                    <strong>Description:</strong> {{ landmark.description }}
-                {% else %}
-                    <em>No description available.</em>
-                {% endif %}
+                <a href="{{ landmark.get_absolute_url }}">{{ landmark.name }}</a>
             </li>
-            <hr>
+        {% empty %}
+            <li><em>There are currently no landmarks.</em></li>
         {% endfor %}
     </ul>
 {% endblock %}
+
+

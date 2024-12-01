@@ -1,3 +1,5 @@
+<!-- cities/city_list.html -->
+
 {% extends 'cities/base.html' %}
 
 {% block title %}
@@ -6,21 +8,18 @@
 
 {% block content %}
     <h2>City List</h2>
+        {%  if perms.cities.add_city %}
+    <a href="{% url 'create-city' %}" class="button button-primary">Create City</a>
+    {% endif %}
+
     <ul>
         {% for city in city_list %}
             <li>
-                <strong>Name:</strong> {{ city.name }}<br>
-                <strong>Country:</strong> {{ city.country }}<br>
-                <strong>Population:</strong> {{ city.population }}<br>
-                {% if city.description %}
-                    <strong>Description:</strong> {{ city.description }}
-                {% else %}
-                    <em>No description available.</em>
-                {% endif %}
+                <a href="{{ city.get_absolute_url }}">{{ city.name }}</a>
             </li>
-            <hr>
         {% endfor %}
     </ul>
 {% endblock %}
+
 
 

@@ -6,15 +6,33 @@
 
 {% block content %}
     <h2>Restaurant List</h2>
+    {% if perms.cities.add_restaurant %}
+    <a href="{% url 'create-restaurant' %}" class="button button-primary">Create Restaurant</a>
+    {% endif %}
+
     <ul>
         {% for restaurant in restaurant_list %}
             <li>
-                <strong>Name:</strong> {{ restaurant.name }}<br>
-                <strong>City:</strong> {{ restaurant.city.name }}<br>
-                <strong>Cuisine:</strong> {{ restaurant.cuisine }}<br>
-                <strong>Rating:</strong> {{ restaurant.rating }}<br>
+                <a href="{{ restaurant.get_absolute_url }}">{{ restaurant.name }}</a>
             </li>
-            <hr>
         {% endfor %}
     </ul>
+
+    {% if is_paginated %}
+        <ul>
+            {% if restaurant_list.has_previous %}
+                <li>
+                    <a href="?page={{ restaurant_list.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            <li>
+                Page {{ restaurant_list.number }} of {{ paginator.num_pages }}
+            </li>
+            {% if restaurant_list.has_next %}
+                <li>
+                    <a href="?page={{ restaurant_list.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

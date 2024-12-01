@@ -2,7 +2,6 @@
 
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -17,6 +16,12 @@ class Migration(migrations.Migration):
         migrations.RemoveField(
             model_name='museum',
             name='exhibits',
+        ),
+        migrations.AddField(
+            model_name='museum',
+            name='exhibits',
+            field=models.CharField(max_length=100, default=''),
+            preserve_default=False,
         ),
         migrations.AlterField(
             model_name='city',

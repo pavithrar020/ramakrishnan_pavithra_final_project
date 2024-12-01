@@ -1,0 +1,18 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Delete Restaurant
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'delete-restaurant' restaurant.id %}" method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            restaurant {{ restaurant.name }}?
+        </p>
+        <a href="{% url 'restaurant-detail' restaurant.id %}" class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Restaurant</button>
+    </form>
+{% endblock %}

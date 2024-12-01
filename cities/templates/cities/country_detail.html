@@ -1,0 +1,36 @@
+{% extends 'cities/base.html' %}
+{% block title %}
+    Country - {{ country.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ country.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Population:</th>
+                <td>{{ country.population }}</td>
+            </tr>
+            <tr>
+                <th>Capital:</th>
+                <td>{{ country.capital }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+    {%  if perms.cities.change_country %}
+        <a href="{% url 'update-country' country.id %}"class="button button-primary">Update</a>
+    {% endif %}
+
+    {%  if perms.cities.delete_country %}
+        <a href="{% url 'delete-country' country.id %}"class="button button-primary">Delete</a>
+    {% endif %}
+    </section>
+
+{% endblock %}
+
+

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class City(models.Model):
@@ -9,6 +10,9 @@ class City(models.Model):
 
     def __str__(self):
         return f"{self.name} - Population: {self.population}, Country: {self.country}"
+
+    def get_absolute_url(self):
+        return reverse('city-detail', args=[str(self.id)])
 
     class Meta:
         verbose_name_plural = "cities"
@@ -35,6 +39,9 @@ class Landmark(models.Model):
     def __str__(self):
         return f"{self.name} ({self.get_landmark_type_display()}) - {self.city.name}"
 
+    def get_absolute_url(self):
+        return reverse('landmark-detail', args=[str(self.id)])
+
     class Meta:
         ordering = ['name']
 
@@ -47,6 +54,9 @@ class Hotel(models.Model):
 
     def __str__(self):
         return f"{self.name} - Rating: {self.rating}"
+
+    def get_absolute_url(self):
+        return reverse('hotel-detail', args=[str(self.id)])
 
     class Meta:
         ordering = ['name']
@@ -61,6 +71,9 @@ class Restaurant(models.Model):
     def __str__(self):
         return f"{self.name} - Cuisine: {self.cuisine}, Rating: {self.rating}"
 
+    def get_absolute_url(self):
+        return reverse('restaurant-detail', args=[str(self.id)])
+
     class Meta:
         ordering = ['name']
 
@@ -74,17 +87,8 @@ class Event(models.Model):
     def __str__(self):
         return f"{self.name} - Date: {self.date}"
 
-    class Meta:
-        ordering = ['name']
-
-
-class Park(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, unique=True)
-    area = models.CharField(max_length=50)
-
-    def __str__(self):
-        return f"{self.name} - Area: {self.area}"
+    def get_absolute_url(self):
+        return reverse('event-detail', args=[str(self.id)])
 
     class Meta:
         ordering = ['name']
@@ -98,6 +102,9 @@ class Review(models.Model):
     def __str__(self):
         return f"Review-{self.id}: {self.comment[:30]}... - Rating: {self.rating}"
 
+    def get_absolute_url(self):
+        return reverse('review_detail', args=[str(self.id)])
+
     class Meta:
         ordering = ['id']
 
@@ -108,6 +115,9 @@ class Museum(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('museum-detail', args=[str(self.id)])
 
     class Meta:
         ordering = ['name']
@@ -121,19 +131,11 @@ class Country(models.Model):
     def __str__(self):
         return f"{self.name} - Population: {self.population}, Capital: {self.capital}"
 
+    def get_absolute_url(self):
+        return reverse('country-detail', args=[str(self.id)])
+
     class Meta:
         verbose_name_plural = "countries"
 
-
-class TouristAttraction(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return f"{self.name} - {self.city.name}"
-
-    class Meta:
-        ordering = ['name']
 
 

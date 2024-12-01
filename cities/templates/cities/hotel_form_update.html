@@ -1,0 +1,13 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Update Hotel - {{ hotel.name }}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'update-hotel' hotel.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Hotel</button>
+    </form>
+{% endblock %}

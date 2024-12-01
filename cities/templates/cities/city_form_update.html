@@ -1,0 +1,24 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if city.id %}
+        Update City - {{ city.name }}
+    {% else %}
+        Create City
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% if city.id %}{% url 'update-city' city.id %}{% else %}{% url 'cities_city_list_urlpattern' %}{% endif %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+            {% if city.id %}
+                Update City
+            {% else %}
+                Create City
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}
+

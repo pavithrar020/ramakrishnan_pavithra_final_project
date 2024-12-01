@@ -1,0 +1,14 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Create Review
+{% endblock %}
+
+{% block content %}
+    <h2>Create Review</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Review</button>
+    </form>
+{% endblock %}

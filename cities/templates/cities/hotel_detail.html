@@ -1,0 +1,69 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {{ hotel.name }} - Hotel Detail
+{% endblock %}
+
+{% block content %}
+    <h2>{{ hotel.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>City:</th>
+                <td>{{ hotel.city.name }}</td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td>{{ hotel.address }}</td>
+            </tr>
+            <tr>
+                <th>Rating:</th>
+                <td>{{ hotel.rating }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+    {%  if perms.cities.change_hotel %}
+        <a href="{% url 'update-hotel' hotel.id %}"class="button button-primary">Update</a>
+    {% endif %}
+
+    {%  if perms.cities.delete_hotel %}
+        <a href="{% url 'delete-hotel' hotel.id %}"class="button button-primary">Delete</a>
+    </section>
+    {% endif %}
+
+    <!-- Add a link to the city_detail page for the city of the hotel -->
+    <section>
+        <h3>City Details</h3>
+        <table>
+            <tr>
+                <th>Country:</th>
+                <td>{{ hotel.city.country }}</td>
+            </tr>
+            <tr>
+                <th>Population:</th>
+                <td>{{ hotel.city.population }}</td>
+            </tr>
+            {% if hotel.city.description %}
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ hotel.city.description }}</td>
+                </tr>
+            {% endif %}
+            <!-- Add a link to the city_detail page for the current city -->
+            <tr>
+                <th>City Detail:</th>
+                <td><a href="{{ hotel.city.get_absolute_url }}">{{ hotel.city.name }}</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Other sections for landmarks and hotels can remain the same -->
+
+{% endblock %}
+
+

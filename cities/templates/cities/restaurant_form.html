@@ -1,0 +1,23 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if restaurant.id %}
+        Update Restaurant
+    {% else %}
+        Create Restaurant
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% if restaurant.id %}{% url 'update-restaurant' restaurant.id %}{% else %}{% url 'cities_restaurant_list_urlpattern' %}{% endif %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+            {% if hotel.id %}
+                Update Restaurant
+            {% else %}
+                Update Restaurant
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

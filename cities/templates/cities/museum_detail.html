@@ -1,0 +1,53 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Museum - {{ museum.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ museum.name }}</h2>
+    <ul class="ezu-button-list">
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>City:</th>
+                <td><a href="{{ museum.city.get_absolute_url }}">{{ museum.city.name }}</a></td>
+            </tr>
+        </table>
+    </section>
+
+     <section>
+     {%  if perms.cities.change_museum %}
+        <a href="{% url 'update-museum' museum.id %}"class="button button-primary">Update</a>
+     {% endif %}
+
+     {%  if perms.cities.delete_museum %}
+        <a href="{% url 'delete-museum' museum.id %}"class="button button-primary">Delete</a>
+     {% endif %}
+    </section>
+
+<section>
+    <h3>City Details</h3>
+    <table>
+        <tr>
+            <th>Country:</th>
+            <td>{{ museum.city.country }}</td>
+        </tr>
+        <tr>
+            <th>Population:</th>
+            <td>{{ museum.city.population }}</td>
+        </tr>
+        {% if museum.city.description %}
+            <tr>
+                <th>Description:</th>
+                <td>{{ museum.city.description }}</td>
+            </tr>
+        {% endif %}
+        <!-- Add a link to the city detail page for the city of the museum -->
+    </table>
+</section>
+
+{% endblock %}
+

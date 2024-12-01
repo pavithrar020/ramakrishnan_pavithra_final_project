@@ -1,0 +1,18 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    Delete Museum
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'delete-museum' museum.id %}" method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            museum {{ museum.name }}?
+        </p>
+        <a href="{% url 'museum-detail' museum.id %}" class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Museum</button>
+    </form>
+{% endblock %}

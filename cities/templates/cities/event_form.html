@@ -1,0 +1,24 @@
+{% extends 'cities/base.html' %}
+
+{% block title %}
+    {% if event.id %}
+        Update Event
+    {% else %}
+        Create Event
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% if event.id %}{% url 'update-event' event.id %}{% else %}{% url 'cities_event_list_urlpattern' %}{% endif %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="button button-primary">
+            {% if event.id %}
+                Update Event
+            {% else %}
+                Update Event
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}
