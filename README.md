@@ -103,7 +103,3 @@ The application leverages Django’s built-in authentication and permission syst
 - **Responsive Design**: Mobile-friendly layout for seamless usage on various devices.  
 - **Code Style**: Follows PEP 8 and includes comments/docstrings for clarity.  
 - **Documentation**: Refer to inline comments and docstrings for further details on specific modules, classes, or functions.
-
----
-
-This project provides a robust starting point for managing and exploring city-related data through a role-based web interface.
